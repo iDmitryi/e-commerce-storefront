@@ -1,5 +1,5 @@
 interface ProductsApiResponse {
-  quotes: Product[]
+  products: Product[]
   total: number
   skip: number
   limit: number
