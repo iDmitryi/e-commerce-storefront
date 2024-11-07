@@ -9,14 +9,12 @@ function App() {
       <div className="h-[20%]">
         <Header />
       </div>
-      <main className="bg-slate-200 w-full h-[80%]">
-        <div className="flex h-full">
-          <div className="w-1/3 h-full">
-            <Plp />
-          </div>
-          <div className="w-2/3">
-            <Pdp />
-          </div>
+      <main className="lg:flex bg-slate-200 w-full lg:h-[80%] h-full gap-16">
+        <div className="lg:w-1/3 h-full w-full">
+          <Plp />
+        </div>
+        <div className="lg:w-2/3 h-full hidden lg:block">
+          <Pdp />
         </div>
       </main>
       <Footer />
