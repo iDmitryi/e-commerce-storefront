@@ -26,6 +26,8 @@ import {
   PRODUCTS_OFFSET
 } from '../../utils/constants.ts'
 import PdpProductQuickView from './PdpProductQuickView.tsx'
+import { useAppDispatch } from '../../app/hooks.ts'
+import { addToCart } from '../cart/cartSlice.ts'
 
 interface IPdpProps {
   productId: number | undefined
@@ -37,6 +39,8 @@ const Pdp: FC<IPdpProps> = ({ productId }) => {
     error,
     isLoading
   } = useGetProductByIdQuery(productId ?? PRODUCTS_OFFSET)
+
+  const dispatch = useAppDispatch()
 
   const [open, setOpen] = useState<null | string>(null)
 
@@ -338,7 +342,13 @@ const Pdp: FC<IPdpProps> = ({ productId }) => {
             </div>
             <form className="mt-6">
               <div className="flex items-center gap-2">
-                <button className="bg-yellow-400 text-black px-4 py-1 rounded-full truncate hover:bg-yellow-500">
+                <button
+                  type="button"
+                  onClick={() => {
+                    dispatch(addToCart({ ...product, quantity: 1 }))
+                  }}
+                  className="bg-yellow-400 text-black px-4 py-1 rounded-full truncate hover:bg-yellow-500"
+                >
                   Add to cart
                 </button>
                 <button aria-label="Add to favorites">

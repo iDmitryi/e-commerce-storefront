@@ -5,6 +5,8 @@ import { StarIcon as StartIconFav } from '@heroicons/react/24/outline'
 import { formatPrice } from '../../utils/formatPrice.ts'
 import { IMAGE_PLACEHOLDER, PRODUCT_STARS } from '../../utils/constants.ts'
 import { IProduct } from '../../utils/types.ts'
+import { useAppDispatch } from '../../app/hooks.ts'
+import { addToCart } from '../cart/cartSlice.ts'
 
 interface IPdpProductCardProps {
   id: number
@@ -29,6 +31,8 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
     rating = 0,
     price = 0
   } = props
+
+  const dispatch = useAppDispatch()
 
   return (
     <div
@@ -98,7 +102,13 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
           ) : null}
         </div>
         <div className="flex items-center gap-2">
-          <button className="bg-yellow-400 text-black px-4 py-1 rounded-full truncate hover:bg-yellow-500">
+          <button
+            type="button"
+            onClick={() => {
+              dispatch(addToCart({ ...props, quantity: 1 }))
+            }}
+            className="bg-yellow-400 text-black px-4 py-1 rounded-full truncate hover:bg-yellow-500"
+          >
             Add to cart
           </button>
           <button aria-label="Add to favorites">
