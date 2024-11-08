@@ -3,10 +3,11 @@ import { combineSlices, configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { productsApiSlice } from '../features/plp/productsApiSlice'
 import { cartSlice } from '../features/cart/cartSlice.ts'
+import { favouriteSlice } from '../features/favourites/favouriteSlice.ts'
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(productsApiSlice, cartSlice)
+const rootReducer = combineSlices(productsApiSlice, cartSlice, favouriteSlice)
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>
 

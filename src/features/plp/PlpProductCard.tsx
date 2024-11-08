@@ -7,6 +7,7 @@ import { IMAGE_PLACEHOLDER, PRODUCT_STARS } from '../../utils/constants.ts'
 import { IProduct } from '../../utils/types.ts'
 import { useAppDispatch } from '../../app/hooks.ts'
 import { addToCart } from '../cart/cartSlice.ts'
+import { addToFavourites } from '../favourites/favouriteSlice.ts'
 
 interface IPdpProductCardProps {
   id: number
@@ -111,7 +112,13 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
           >
             Add to cart
           </button>
-          <button aria-label="Add to favorites">
+          <button
+            type="button"
+            onClick={() => {
+              dispatch(addToFavourites(props))
+            }}
+            aria-label="Add to favorites"
+          >
             <StartIconFav
               aria-hidden="true"
               className={cn(

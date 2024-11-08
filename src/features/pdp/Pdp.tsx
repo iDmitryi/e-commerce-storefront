@@ -28,6 +28,7 @@ import {
 import PdpProductQuickView from './PdpProductQuickView.tsx'
 import { useAppDispatch } from '../../app/hooks.ts'
 import { addToCart } from '../cart/cartSlice.ts'
+import { addToFavourites } from '../favourites/favouriteSlice.ts'
 
 interface IPdpProps {
   productId: number | undefined
@@ -351,7 +352,13 @@ const Pdp: FC<IPdpProps> = ({ productId }) => {
                 >
                   Add to cart
                 </button>
-                <button aria-label="Add to favorites">
+                <button
+                  type="button"
+                  onClick={() => {
+                    dispatch(addToFavourites(product))
+                  }}
+                  aria-label="Add to favorites"
+                >
                   <StartIconFav
                     aria-hidden="true"
                     className={cn(
