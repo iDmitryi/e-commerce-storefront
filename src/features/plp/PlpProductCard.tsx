@@ -25,8 +25,7 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
     description = '',
     thumbnail = '',
     rating = 0,
-    price = 0,
-    reviews
+    price = 0
   } = props
 
   return (
@@ -65,7 +64,7 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
         </div>
       </div>
       {/* Product Price */}
-      <div className="flex flex-col justify-around items-end w-[40%]">
+      <div className="flex flex-col justify-between items-end w-[40%]">
         <div className="flex gap-2">
           <p
             className={cn(
@@ -81,15 +80,11 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
             </p>
           ) : null}
         </div>
-        {discountPercentage ? (
-          <p className="font-medium text-gray-500">{discountPercentage}% off</p>
-        ) : null}
-        <p className="mt-1 text-sm text-gray-500">{reviews} reviews</p>
         <div className="flex items-center gap-2">
           <button className="bg-yellow-400 text-black px-4 py-1 rounded-full truncate hover:bg-yellow-500">
             Add to cart
           </button>
-          <button>
+          <button aria-label="Add to favorites">
             <StartIconFav
               aria-hidden="true"
               className={cn(

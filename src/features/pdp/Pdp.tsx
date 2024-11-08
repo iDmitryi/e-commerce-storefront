@@ -104,16 +104,11 @@ const Pdp: FC = () => {
                     {formatPrice(price)}
                   </p>
                   {discountPercentage ? (
-                    <p className="text-xl font-bold text-gray-900">
+                    <h2 className="text-xl font-bold text-gray-900">
                       {formatPrice(price - (price * discountPercentage) / 100)}
-                    </p>
+                    </h2>
                   ) : null}
                 </div>
-                {discountPercentage ? (
-                  <p className="font-medium text-gray-500">
-                    {discountPercentage}% off
-                  </p>
-                ) : null}
               </div>
             </div>
 
@@ -158,6 +153,7 @@ const Pdp: FC = () => {
                     <button
                       type="button"
                       className="absolute top-4 right-4"
+                      aria-label="Expand image"
                       onClick={() => setOpen(image)}
                     >
                       <ArrowsPointingOutIcon
@@ -323,7 +319,7 @@ const Pdp: FC = () => {
                 <button className="bg-yellow-400 text-black px-4 py-1 rounded-full truncate hover:bg-yellow-500">
                   Add to cart
                 </button>
-                <button>
+                <button aria-label="Add to favorites">
                   <StartIconFav
                     aria-hidden="true"
                     className={cn(
