@@ -1,1 +1,5 @@
-export const PRODUCTS_LIMIT = 5
+const PRODUCTS_LIMIT = 20
+
+const PRODUCT_STARS = 5
+
+export { PRODUCTS_LIMIT, PRODUCT_STARS }

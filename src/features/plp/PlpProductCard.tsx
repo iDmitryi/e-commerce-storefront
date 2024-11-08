@@ -3,6 +3,7 @@ import { cn } from '../../utils/cn.ts'
 import { StarIcon } from '@heroicons/react/16/solid'
 import { StarIcon as StartIconFav } from '@heroicons/react/24/outline'
 import { formatPrice } from '../../utils/formatPrice.ts'
+import { PRODUCT_STARS } from '../../utils/constants.ts'
 
 interface IPdpProductCardProps {
   id: number
@@ -31,7 +32,7 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
   return (
     <div
       key={id}
-      className="group relative sm:p-6 flex bg-gray-200 rounded-sm "
+      className="group relative sm:p-6 flex xl:flex-row lg:flex-col bg-gray-200 rounded-sm "
     >
       {/* Product Image */}
       <div className="mr-4 mb-6 shrink-0 self-center overflow-hidden rounded-full bg-gray-50 group-hover:opacity-75 h-24 w-24">
@@ -47,7 +48,7 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
         <p className="mt-1">{description}</p>
         <div className="flex items-center xl:col-span-1">
           <div className="flex items-center">
-            {Array.from(Array(5).keys()).map(r => (
+            {Array.from(Array(PRODUCT_STARS).keys()).map(r => (
               <StarIcon
                 key={r}
                 aria-hidden="true"
@@ -58,7 +59,9 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
               />
             ))}
           </div>
-          <span className="sr-only"> {rating} out of 5 stars</span>
+          <span className="sr-only">
+            {rating} out of {PRODUCT_STARS} stars
+          </span>
         </div>
       </div>
       {/* Product Price */}

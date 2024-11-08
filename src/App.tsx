@@ -6,10 +6,10 @@ import Footer from './features/Footer.tsx'
 function App() {
   return (
     <div className="w-full h-full">
-      <div className="h-[20%]">
+      <div className="h-[10%]">
         <Header />
       </div>
-      <main className="lg:flex bg-white w-full lg:h-[80%] h-full">
+      <main className="lg:flex bg-white w-full lg:h-[90%] h-full">
         <div className="lg:w-[40%] h-full w-full overflow-y-scroll no-scrollbar">
           <Plp />
         </div>
