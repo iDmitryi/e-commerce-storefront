@@ -26,7 +26,7 @@ const Header: FC = () => {
                 name="search"
                 type="search"
                 placeholder="Search"
-                className="block w-full rounded-sm border-0 bg-white py-1.5 pl-4 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                className="block w-full rounded-sm border bg-white py-1.5 pl-4 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
               />
               <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center pl-3">
                 <MagnifyingGlassIcon

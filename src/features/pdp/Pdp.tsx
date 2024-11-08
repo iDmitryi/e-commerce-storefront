@@ -1,5 +1,5 @@
 // product detail page
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import {
   Disclosure,
   DisclosureButton,
@@ -14,16 +14,19 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import {
   MinusIcon,
   PlusIcon,
-  StarIcon as StartIconFav
+  StarIcon as StartIconFav,
+  ArrowsPointingOutIcon
 } from '@heroicons/react/24/outline'
 import { cn } from '../../utils/cn.ts'
 import { useGetProductByIdQuery } from '../plp/productsApiSlice.ts'
 import { formatPrice } from '../../utils/formatPrice.ts'
 import { PRODUCT_STARS } from '../../utils/constants.ts'
+import PdpProductQuickView from './PdpProductQuickView.tsx'
 
 const Pdp: FC = () => {
-  const productId = 6 // product ID
+  const productId = 100 // product ID
   const { data: product, error, isLoading } = useGetProductByIdQuery(productId)
+  const [open, setOpen] = useState<null | string>(null)
 
   if (isLoading || !product) return <div>Loading...</div>
   if (error) return <div>Error loading product</div>
@@ -125,6 +128,7 @@ const Pdp: FC = () => {
                       className="group relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                     >
                       <span className="sr-only">{title}</span>
+
                       <span className="absolute inset-0 overflow-hidden rounded-md">
                         <img
                           alt={`${i}-${title}`}
@@ -132,10 +136,12 @@ const Pdp: FC = () => {
                           className="h-full w-full object-cover object-center"
                         />
                       </span>
+
                       <span
                         aria-hidden="true"
                         className="pointer-events-none absolute inset-0 rounded-md ring-2 ring-transparent ring-offset-2 group-data-[selected]:ring-indigo-500"
                       />
+                      <PdpProductQuickView open={open} setOpen={setOpen} />
                     </Tab>
                   ))}
                 </TabList>
@@ -149,6 +155,16 @@ const Pdp: FC = () => {
                       src={image}
                       className="h-full w-full object-cover object-center sm:rounded-lg"
                     />
+                    <button
+                      type="button"
+                      className="absolute top-4 right-4"
+                      onClick={() => setOpen(image)}
+                    >
+                      <ArrowsPointingOutIcon
+                        aria-hidden="true"
+                        className="h-6 w-6 text-gray-400 hover:text-gray-500"
+                      />
+                    </button>
                   </TabPanel>
                 ))}
               </TabPanels>
