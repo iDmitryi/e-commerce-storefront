@@ -48,7 +48,7 @@ const Plp: FC<IPlpProps> = ({ onSelectProduct }) => {
   }
 
   return (
-    <div className="flex text-black flex-col gap-4 px-4 py-1">
+    <div className="flex text-black flex-col gap-4">
       {isLoading && !products.length ? (
         <h1>Loading...</h1>
       ) : products.length ? (

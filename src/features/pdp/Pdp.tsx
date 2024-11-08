@@ -100,8 +100,8 @@ const Pdp: FC<IPdpProps> = ({ productId }) => {
   }
 
   return (
-    <div className="bg-gray-200 h-[96%] mt-1 mr-4 overflow-auto">
-      <div className="mx-auto max-w-2xl pt-16 lg:max-w-7xl lg:px-6 rounded-sm">
+    <div className="bg-gray-200 h-[96%] overflow-auto">
+      <div className="mx-auto max-w-2xl py-8 lg:max-w-7xl lg:px-6 rounded-sm">
         <div className="lg:grid lg:grid-cols-2 lg:items-start">
           {/* Product & Price */}
           <div className="flex flex-col gap-6">

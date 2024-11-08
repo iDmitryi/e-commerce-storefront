@@ -5,10 +5,10 @@ import FavouriteDropdown from './favourites/FavouriteDropdown.tsx'
 
 const Header: FC = () => {
   return (
-    <header className="h-full w-full flex justify-between items-center px-4">
+    <header className="h-full w-full flex justify-between items-center">
       <div className="w-[40%] font-bold text-4xl">App Logo</div>
       <div className="w-[60%] flex items-center justify-between">
-        <div className="flex w-[40%] items-center justify-center lg:ml-16 lg:justify-end">
+        <div className="flex w-[40%] pl-9">
           <div className="w-full max-w-xl lg:max-w-xs">
             <label htmlFor="search" className="sr-only">
               Search
