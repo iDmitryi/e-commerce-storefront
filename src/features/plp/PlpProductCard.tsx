@@ -31,7 +31,7 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
   return (
     <div
       key={id}
-      className="group relative sm:p-6 flex xl:flex-row lg:flex-col bg-gray-200 rounded-sm "
+      className="group border border-gray-200 hover:border-gray-600 relative sm:p-6 flex xl:flex-row lg:flex-col bg-gray-200 rounded-sm "
     >
       {/* Product Image */}
       <div className="mr-4 mb-6 shrink-0 self-center overflow-hidden rounded-full bg-gray-50 group-hover:opacity-75 h-24 w-24">
@@ -43,7 +43,10 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
       </div>
       {/* Product Details */}
       <div>
-        <h4 className="text-lg font-bold">{title}</h4>
+        <a href={'#'}>
+          <h4 className="text-lg font-bold">{title}</h4>
+        </a>
+
         <p className="mt-1">{description}</p>
         <div className="flex items-center xl:col-span-1">
           <div className="flex items-center">
