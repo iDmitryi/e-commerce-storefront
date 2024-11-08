@@ -81,8 +81,8 @@ const Pdp: FC = () => {
 
   return (
     <div className="bg-gray-200 h-[96%] mt-1 mr-4">
-      <div className="mx-auto max-w-2xl pt-16 lg:max-w-7xl lg:px-12">
-        <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+      <div className="mx-auto max-w-2xl pt-16 lg:max-w-7xl lg:px-6 rounded-sm">
+        <div className="lg:grid lg:grid-cols-2 lg:items-start">
           {/* Product & Price */}
           <div className="flex flex-col gap-6">
             <div className="flex w-full justify-around">
@@ -195,7 +195,7 @@ const Pdp: FC = () => {
             </section>
           </div>
           {/* Product Reviews */}
-          <div className="px-4 sm:mt-16 sm:px-0 lg:mt-0 flex flex-col justify-between items-end h-full">
+          <div className="sm:mt-16 sm:px-0 lg:mt-0 flex flex-col justify-between items-end h-full">
             <div className="flex flex-col items-end gap-16">
               <div>
                 <h3 className="sr-only">Reviews</h3>
@@ -276,16 +276,17 @@ const Pdp: FC = () => {
                               )}
                             />
 
-                            <div className="relative ml-3 flex-1">
-                              <div className="h-3 rounded-full border border-gray-200 bg-gray-100" />
-                              {count.count > 0 ? (
-                                <div
-                                  style={{
-                                    width: `calc(${count.count} / ${reviewsInfo.totalCount} * 100%)`
-                                  }}
-                                  className="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"
-                                />
-                              ) : null}
+                            <div className=" ml-3 flex-1">
+                              <div className="h-3 rounded-full border border-gray-200 bg-gray-100">
+                                {count.count > 0 ? (
+                                  <div
+                                    style={{
+                                      width: `calc(${count.count} / ${reviewsInfo.totalCount} * 100%)`
+                                    }}
+                                    className="h-full inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"
+                                  />
+                                ) : null}
+                              </div>
                             </div>
                           </div>
                         </dt>
