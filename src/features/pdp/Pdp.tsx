@@ -52,12 +52,14 @@ const Pdp: FC<IPdpProps> = ({ productId }) => {
     price,
     discountPercentage,
     title,
-    rating,
     description,
     dimensions,
     weight,
     reviews
   } = product
+
+  const rating =
+    reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
 
   const additionalDetails = [
     {
@@ -255,37 +257,15 @@ const Pdp: FC<IPdpProps> = ({ productId }) => {
                     {rating} out of {PRODUCT_STARS} stars
                   </span>
                 </div>
+                <p className="py-2 text-sm text-gray-900">
+                  Based on {reviewsInfo.totalCount} reviews
+                </p>
               </div>
 
               <div className="lg:col-span-4">
                 <h2 className="text-2xl font-bold tracking-tight text-gray-900">
                   Customer Reviews
                 </h2>
-
-                <div className="mt-3 flex items-center">
-                  <div>
-                    <div className="flex items-center">
-                      {Array.from(Array(PRODUCT_STARS).keys()).map(rating => (
-                        <StarIcon
-                          key={rating}
-                          aria-hidden="true"
-                          className={cn(
-                            reviewsInfo.average > rating
-                              ? 'text-yellow-400'
-                              : 'text-gray-300',
-                            'h-5 w-5 shrink-0'
-                          )}
-                        />
-                      ))}
-                    </div>
-                    <p className="sr-only">
-                      {reviewsInfo.average} out of {PRODUCT_STARS} stars
-                    </p>
-                  </div>
-                  <p className="ml-2 text-sm text-gray-900">
-                    Based on {reviewsInfo.totalCount} reviews
-                  </p>
-                </div>
 
                 <div className="mt-6">
                   <h3 className="sr-only">Review data</h3>

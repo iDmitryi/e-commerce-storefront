@@ -4,7 +4,7 @@ import { StarIcon } from '@heroicons/react/16/solid'
 import { StarIcon as StartIconFav } from '@heroicons/react/24/outline'
 import { formatPrice } from '../../utils/formatPrice.ts'
 import { IMAGE_PLACEHOLDER, PRODUCT_STARS } from '../../utils/constants.ts'
-import { IProduct } from '../../utils/types.ts'
+import { IProduct, Review } from '../../utils/types.ts'
 import { useAppDispatch } from '../../app/hooks.ts'
 import { addToCart } from '../cart/cartSlice.ts'
 import { addToFavourites } from '../favourites/favouriteSlice.ts'
@@ -17,6 +17,7 @@ interface IPdpProductCardProps {
   discountPercentage: number
   rating: number
   images: string[]
+  reviews: Review[]
   thumbnail: string
 
   onSelectProduct: (product: Partial<IProduct>) => void
@@ -29,9 +30,12 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
     discountPercentage = null,
     description = '',
     thumbnail = '',
-    rating = 0,
-    price = 0
+    price = 0,
+    reviews = []
   } = props
+
+  const rating =
+    reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
 
   const dispatch = useAppDispatch()
 
