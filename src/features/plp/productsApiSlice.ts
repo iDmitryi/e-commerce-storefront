@@ -12,11 +12,14 @@ export const productsApiSlice = createApi({
     // Supply generics for the return type `ProductsApiResponse`
     // and the expected query argument. If there is no argument, use `void`
     // for the argument type instead.
-    getProducts: build.query<ProductsApiResponse, number>({
-      query: (limit = 20) => `?limit=${limit}`,
+    getProducts: build.query<
+      ProductsApiResponse,
+      { limit: number; skip: number }
+    >({
+      query: ({ limit = 20, skip = 0 }) => `?limit=${limit}&skip=${skip}`,
       // `providesTags` determines which 'tag' is attached to the
       // cached data returned by the query.
-      providesTags: (_result, _error, id) => [{ type: 'Products', id }]
+      providesTags: (_result, _error, arg) => [{ type: 'Products', arg }]
     })
   })
 })

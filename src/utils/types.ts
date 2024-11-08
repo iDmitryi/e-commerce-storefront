@@ -1,11 +1,11 @@
 interface ProductsApiResponse {
-  products: Product[]
+  products: IProduct[]
   total: number
   skip: number
   limit: number
 }
 
-interface Product {
+interface IProduct {
   id: number
   title: string
   description: string
@@ -51,4 +51,4 @@ interface MetaData {
   qrCode: string // Assuming it's a string URL or base64 encoded string
 }
 
-export type { ProductsApiResponse, Product, Dimensions, Review, MetaData }
+export type { ProductsApiResponse, IProduct, Dimensions, Review, MetaData }
