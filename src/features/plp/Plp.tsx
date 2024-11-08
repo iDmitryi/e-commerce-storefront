@@ -17,8 +17,6 @@ const Plp: FC<IPlpProps> = ({ onSelectProduct }) => {
     skip
   })
 
-  console.log(data?.products)
-
   const [products, setProducts] = useState<IProduct[]>([])
 
   const handleScroll = () => {

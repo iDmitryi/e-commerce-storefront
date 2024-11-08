@@ -1,10 +1,11 @@
 // Need to use the React-specific entry point to import `createApi`
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { IProduct, ProductsApiResponse } from '../../utils/types.ts'
+import { PRODUCTS_BASE_URL } from '../../utils/constants.ts'
 
 // Define a service using a base URL and expected endpoints
 export const productsApiSlice = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/products' }),
+  baseQuery: fetchBaseQuery({ baseUrl: PRODUCTS_BASE_URL }),
   reducerPath: 'productsApi',
   // Tag types are used for caching and invalidation.
   tagTypes: ['Products'],
