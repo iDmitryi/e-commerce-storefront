@@ -1,5 +1,5 @@
 // product detail page
-import { FC, useState } from 'react'
+import { FC, Suspense, useState } from 'react'
 import {
   Disclosure,
   DisclosureButton,
@@ -20,12 +20,24 @@ import {
 import { cn } from '../../utils/cn.ts'
 import { useGetProductByIdQuery } from '../plp/productsApiSlice.ts'
 import { formatPrice } from '../../utils/formatPrice.ts'
-import { PRODUCT_STARS } from '../../utils/constants.ts'
+import {
+  IMAGE_PLACEHOLDER,
+  PRODUCT_STARS,
+  PRODUCTS_OFFSET
+} from '../../utils/constants.ts'
 import PdpProductQuickView from './PdpProductQuickView.tsx'
 
-const Pdp: FC = () => {
-  const productId = 100 // product ID
-  const { data: product, error, isLoading } = useGetProductByIdQuery(productId)
+interface IPdpProps {
+  productId: number | undefined
+}
+
+const Pdp: FC<IPdpProps> = ({ productId }) => {
+  const {
+    data: product,
+    error,
+    isLoading
+  } = useGetProductByIdQuery(productId ?? PRODUCTS_OFFSET)
+
   const [open, setOpen] = useState<null | string>(null)
 
   if (isLoading || !product) return <div>Loading...</div>
@@ -83,17 +95,17 @@ const Pdp: FC = () => {
   }
 
   return (
-    <div className="bg-gray-200 h-[96%] mt-1 mr-4">
+    <div className="bg-gray-200 h-[96%] mt-1 mr-4 overflow-auto">
       <div className="mx-auto max-w-2xl pt-16 lg:max-w-7xl lg:px-6 rounded-sm">
         <div className="lg:grid lg:grid-cols-2 lg:items-start">
           {/* Product & Price */}
           <div className="flex flex-col gap-6">
             <div className="flex w-full justify-around">
               <h2 className="sr-only">Product information</h2>
-              <h1 className="w-[70%] text-3xl font-bold tracking-tight text-gray-900">
+              <h1 className="w-auto text-3xl font-bold tracking-tight text-gray-900">
                 {title}
               </h1>
-              <div className="w-[30%] flex flex-col items-end">
+              <div className="w-auto flex flex-col items-end">
                 <div className="flex gap-2 items-baseline">
                   <p
                     className={cn(
@@ -125,11 +137,16 @@ const Pdp: FC = () => {
                       <span className="sr-only">{title}</span>
 
                       <span className="absolute inset-0 overflow-hidden rounded-md">
-                        <img
-                          alt={`${i}-${title}`}
-                          src={image}
-                          className="h-full w-full object-cover object-center"
-                        />
+                        <Suspense key={image} fallback={<div>Loading...</div>}>
+                          <img
+                            onError={e => {
+                              e.currentTarget.src = IMAGE_PLACEHOLDER
+                            }}
+                            alt={`${i}-${title}`}
+                            src={image}
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </Suspense>
                       </span>
 
                       <span
@@ -145,22 +162,27 @@ const Pdp: FC = () => {
               <TabPanels className="aspect-h-1 aspect-w-1 w-full bg-white rounded-2xl">
                 {product.images.map((image, i) => (
                   <TabPanel key={i}>
-                    <img
-                      alt={`${i}-product`}
-                      src={image}
-                      className="h-full w-full object-cover object-center sm:rounded-lg"
-                    />
-                    <button
-                      type="button"
-                      className="absolute top-4 right-4"
-                      aria-label="Expand image"
-                      onClick={() => setOpen(image)}
-                    >
-                      <ArrowsPointingOutIcon
-                        aria-hidden="true"
-                        className="h-6 w-6 text-gray-400 hover:text-gray-500"
+                    <Suspense key={image} fallback={<div>Loading...</div>}>
+                      <img
+                        onError={e => {
+                          e.currentTarget.src = IMAGE_PLACEHOLDER
+                        }}
+                        alt={`${i}-product`}
+                        src={image}
+                        className="h-full w-full object-cover object-center sm:rounded-lg"
                       />
-                    </button>
+                      <button
+                        type="button"
+                        className="absolute top-4 right-4"
+                        aria-label="Expand image"
+                        onClick={() => setOpen(image)}
+                      >
+                        <ArrowsPointingOutIcon
+                          aria-hidden="true"
+                          className="h-6 w-6 text-gray-400 hover:text-gray-500"
+                        />
+                      </button>
+                    </Suspense>
                   </TabPanel>
                 ))}
               </TabPanels>

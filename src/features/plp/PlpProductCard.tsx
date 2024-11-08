@@ -1,9 +1,10 @@
-import { FC } from 'react'
+import { FC, Suspense } from 'react'
 import { cn } from '../../utils/cn.ts'
 import { StarIcon } from '@heroicons/react/16/solid'
 import { StarIcon as StartIconFav } from '@heroicons/react/24/outline'
 import { formatPrice } from '../../utils/formatPrice.ts'
-import { PRODUCT_STARS } from '../../utils/constants.ts'
+import { IMAGE_PLACEHOLDER, PRODUCT_STARS } from '../../utils/constants.ts'
+import { IProduct } from '../../utils/types.ts'
 
 interface IPdpProductCardProps {
   id: number
@@ -14,7 +15,8 @@ interface IPdpProductCardProps {
   rating: number
   images: string[]
   thumbnail: string
-  reviews: number
+
+  onSelectProduct: (product: Partial<IProduct>) => void
 }
 
 const PlpProductCard: FC<IPdpProductCardProps> = props => {
@@ -35,17 +37,29 @@ const PlpProductCard: FC<IPdpProductCardProps> = props => {
     >
       {/* Product Image */}
       <div className="mr-4 mb-6 shrink-0 self-center overflow-hidden rounded-full bg-gray-50 group-hover:opacity-75 h-24 w-24">
-        <img
-          alt="product"
-          src={thumbnail}
-          className="h-full w-full object-cover object-center"
-        />
+        <Suspense key={thumbnail} fallback={<div>Loading...</div>}>
+          <img
+            onError={e => {
+              e.currentTarget.src = IMAGE_PLACEHOLDER
+            }}
+            alt="product"
+            src={thumbnail}
+            className="h-full w-full object-cover object-center"
+          />
+        </Suspense>
       </div>
       {/* Product Details */}
-      <div>
-        <a href={'#'}>
+      <div className="w-full flex flex-col items-start">
+        <button
+          type="button"
+          onClick={() => {
+            const { onSelectProduct, ...rest } = props
+            onSelectProduct(rest)
+          }}
+          className="text-start"
+        >
           <h4 className="text-lg font-bold">{title}</h4>
-        </a>
+        </button>
 
         <p className="mt-1">{description}</p>
         <div className="flex items-center xl:col-span-1">

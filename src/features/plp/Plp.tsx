@@ -3,14 +3,20 @@ import { FC, useEffect, useState } from 'react'
 import { useGetProductsQuery } from './productsApiSlice.ts'
 import PlpProductCard from './PlpProductCard.tsx'
 import { IProduct } from '../../utils/types.ts'
-import { PRODUCTS_LIMIT } from '../../utils/constants.ts'
+import { PRODUCTS_LIMIT, PRODUCTS_OFFSET } from '../../utils/constants.ts'
 
-const Plp: FC = () => {
-  const [skip, setSkip] = useState(0)
+interface IPlpProps {
+  onSelectProduct: (product: Partial<IProduct>) => void
+}
+
+const Plp: FC<IPlpProps> = ({ onSelectProduct }) => {
+  const [skip, setSkip] = useState(PRODUCTS_OFFSET - 1)
+
   const { data, isError, isLoading } = useGetProductsQuery({
     limit: PRODUCTS_LIMIT,
     skip
   })
+
   const [products, setProducts] = useState<IProduct[]>([])
 
   const handleScroll = () => {
@@ -50,7 +56,7 @@ const Plp: FC = () => {
           <PlpProductCard
             key={product.id}
             {...product}
-            reviews={product.reviews?.length ?? 0}
+            onSelectProduct={onSelectProduct}
           />
         ))
       ) : (
